@@ -13,6 +13,7 @@ test('навигация, тема и ссылки работают', async ({ p
   }
   await page.getByRole('link', { name: 'Проекты', exact: true }).click()
   await expect(page.locator('#work')).toBeInViewport()
+  await expect(page.getByRole('heading', { name: /Дизайн-система.*работает.*продукте/ })).toBeVisible()
 
   await expect(page.getByRole('link', { name: /borbasov2003/ })).toHaveAttribute('href', 'mailto:borbasov2003@yandex.ru')
   await expect(page.getByRole('link', { name: 'PDF ↓' })).toHaveAttribute('download', '')
@@ -48,4 +49,17 @@ test('изображения загружаются, reduced motion соблюд
   expect(failedImages).toBe(0)
   const movement = await page.locator('.reveal').first().evaluate((element) => getComputedStyle(element).transform)
   expect(movement).toBe('none')
+})
+
+test('кейс SENSE использует реальные доступные визуалы', async ({ page }) => {
+  await page.goto('./')
+  const assets = page.locator('[data-sense-asset]')
+  await expect(assets).toHaveCount(4)
+  for (let index = 0; index < await assets.count(); index += 1) {
+    const image = assets.nth(index)
+    await image.scrollIntoViewIfNeeded()
+    await expect(image).toHaveAttribute('alt', /\S+/)
+    await expect.poll(() => image.evaluate((node) => node.complete && node.naturalWidth > 0)).toBe(true)
+  }
+  await expect(page.locator('#work')).toContainText('Коммерческий проект. Исходники закрыты.')
 })

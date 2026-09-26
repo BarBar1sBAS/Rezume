@@ -65,12 +65,12 @@ function Hero() {
         </div>
       </div>
       <div className="hero-stage hero-in" aria-label="Коллаж из реальных интерфейсов проектов">
-        <img className="texture" src="/Rezume/assets/optimized/hero-texture-1200.webp" srcSet="/Rezume/assets/optimized/hero-texture-640.webp 640w, /Rezume/assets/optimized/hero-texture-1200.webp 1200w" sizes="(max-width: 767px) 90vw, 50vw" alt="" />
+        <img className="texture" src="/Rezume/assets/optimized/hero-texture-1200.webp" srcSet="/Rezume/assets/optimized/hero-texture-640.webp 640w, /Rezume/assets/optimized/hero-texture-800.webp 800w, /Rezume/assets/optimized/hero-texture-1200.webp 1200w" sizes="(max-width: 767px) 90vw, 50vw" alt="" />
         <figure className="shot shot-main">
           <img src="/Rezume/assets/optimized/vk-marusya-1200.webp" srcSet="/Rezume/assets/optimized/vk-marusya-640.webp 640w, /Rezume/assets/optimized/vk-marusya-1200.webp 1200w" sizes="(max-width: 767px) 86vw, 43vw" alt="Интерфейс проекта VK Маруся" width="1440" height="900" fetchPriority="high" />
         </figure>
         <figure className="shot shot-top">
-          <img src="/Rezume/assets/optimized/kodi-ai-640.webp" alt="Экран входа Коди.АИ" width="1440" height="900" />
+          <img src="/Rezume/assets/sense/datepicker-640.webp" alt="Компонент DatePickerV2 из дизайн-системы SENSE" width="640" height="452" data-sense-asset />
         </figure>
         <span className="stage-note">Сделано руками,<br />проверено тестами</span>
       </div>
@@ -92,56 +92,53 @@ function Evidence() {
   )
 }
 
-function SenseDemo() {
-  const [page, setPage] = useState(2)
-  const [loading, setLoading] = useState(false)
-  const [date, setDate] = useState('2026-09-26')
-
-  const reload = () => {
-    setLoading(true)
-    window.setTimeout(() => setLoading(false), 650)
-  }
-
-  return (
-    <div className="component-lab">
-      <div className="lab-bar">
-        <span><i /> Component lab</span>
-        <button type="button" onClick={reload}>Обновить</button>
-      </div>
-      <div className="lab-header">
-        <div><small>План найма</small><h3>Frontend-команда</h3></div>
-        <label>Дата встречи<input type="date" value={date} onChange={(event) => setDate(event.target.value)} /></label>
-      </div>
-      <div className="lab-grid" aria-live="polite">
-        {loading ? Array.from({ length: 4 }, (_, index) => <div className="skeleton" key={index} />) : [
-          ['Открытые позиции', '04'], ['Кандидаты', '18'], ['Интервью', '07'], ['Офферы', '02'],
-        ].map(([label, value]) => <div className="lab-cell" key={label}><span>{label}</span><strong>{value}</strong></div>)}
-      </div>
-      <div className="pagination" aria-label="Пагинация демонстрации">
-        <button type="button" onClick={() => setPage(Math.max(1, page - 1))} aria-label="Предыдущая страница">←</button>
-        {[1, 2, 3].map((item) => <button type="button" className={item === page ? 'active' : ''} onClick={() => setPage(item)} aria-current={item === page ? 'page' : undefined} key={item}>{item}</button>)}
-        <button type="button" onClick={() => setPage(Math.min(3, page + 1))} aria-label="Следующая страница">→</button>
-      </div>
-    </div>
-  )
-}
-
 function SenseCase() {
   return (
     <Reveal>
       <section className="case sense-case" id="work">
-        <div className="section-number">01 / Selected work</div>
-        <div className="case-heading">
-          <div><p className="eyebrow">SENSE · обезличенный кейс</p><h2>UI-система для<br />HR-продукта</h2></div>
-          <p>Развивал продуктовые сценарии и библиотеку компонентов: от форм и гридов до сложного DatePicker. Ниже — заново собранная демонстрация на вымышленных данных, без корпоративного кода.</p>
+        <div className="sense-masthead">
+          <img src="/Rezume/assets/sense/logo.svg" alt="SENSE" width="106" height="32" />
+          <div><span>Frontend-разработчик</span><span>сентябрь 2025 - июнь 2026</span></div>
         </div>
-        <SenseDemo />
+        <div className="sense-intro">
+          <p className="eyebrow">Коммерческий продукт</p>
+          <h2>Дизайн-система,<br />которая работает<br />в продукте</h2>
+          <p>В SENSE я развивал общую UI-библиотеку и доводил её компоненты до продуктовых HR-сценариев: форм, гридов, фильтров, навигации и состояний загрузки.</p>
+        </div>
+        <figure className="sense-artifact sense-primary">
+          <picture>
+            <source media="(max-width: 767px)" srcSet="/Rezume/assets/sense/datepicker-640.webp" />
+            <img src="/Rezume/assets/sense/datepicker.webp" alt="Открытый DatePickerV2 с календарём и выбором месяца из Storybook SENSE" width="1120" height="790" loading="lazy" data-sense-asset />
+          </picture>
+          <figcaption><strong>DatePickerV2</strong><span>Календарь, диапазоны и проверенные состояния</span></figcaption>
+        </figure>
+        <div className="sense-artifacts-secondary">
+          <figure className="sense-artifact sense-pagination">
+            <picture>
+              <source media="(max-width: 767px)" srcSet="/Rezume/assets/sense/pagination-640.webp" />
+              <img src="/Rezume/assets/sense/pagination.webp" alt="Компонент Pagination со статистикой записей из Storybook SENSE" width="1200" height="163" loading="lazy" data-sense-asset />
+            </picture>
+            <figcaption><strong>Pagination</strong><span>Единое управление большими выборками</span></figcaption>
+          </figure>
+          <figure className="sense-artifact sense-skeleton">
+            <picture>
+              <source media="(max-width: 767px)" srcSet="/Rezume/assets/sense/skeleton-640.webp" />
+              <img src="/Rezume/assets/sense/skeleton.webp" alt="Табличное состояние загрузки Skeleton из Storybook SENSE" width="1080" height="480" loading="lazy" data-sense-asset />
+            </picture>
+            <figcaption><strong>Skeleton</strong><span>Загрузка повторяет структуру контента</span></figcaption>
+          </figure>
+        </div>
+        <div className="sense-contributions">
+          <article><span>Система</span><h3>Системные компоненты</h3><p>Развивал DatePickerV2, Pagination, Skeleton, HeaderContent и документировал состояния в Storybook.</p></article>
+          <article><span>Качество</span><h3>Тесты как часть разработки</h3><p>Покрывал компоненты, hooks и utilities unit-тестами на Vitest. Работал в TDD-контуре.</p></article>
+          <article><span>Продукт</span><h3>Интеграция в HR-сценарии</h3><p>Интегрировал общую пагинацию, loaders, sidebar, формы, гриды, фильтры и валидацию.</p></article>
+        </div>
         <div className="impact-row">
           <div><strong>≈25%</strong><span>быстрее повторная сборка экранов благодаря Storybook</span></div>
           <div><strong>≈15%</strong><span>быстрее code review с едиными правилами компонентов</span></div>
           <div><strong>≈30%</strong><span>меньше регрессий после покрытия критичных компонентов тестами</span></div>
         </div>
-        <p className="case-footnote">Оценки приведены примерно, по данным из резюме.</p>
+        <div className="sense-disclosure"><span>Коммерческий проект. Исходники закрыты.</span><span>Оценки приведены примерно, по данным из резюме.</span></div>
       </section>
     </Reveal>
   )
