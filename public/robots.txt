@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://barbar1sbas.github.io/Rezume/sitemap.xml
