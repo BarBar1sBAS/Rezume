@@ -63,3 +63,36 @@ test('кейс SENSE использует реальные доступные в
   }
   await expect(page.locator('#work')).toContainText('Коммерческий проект. Исходники закрыты.')
 })
+
+test('музей заменяет photos-app и расположен между SENSE и Коди.АИ', async ({ page }) => {
+  await page.goto('./')
+
+  const sectionOrder = await page.locator('main section').evaluateAll((sections) =>
+    sections.map((section) => section.getAttribute('data-museum-case') !== null
+      ? 'museum'
+      : section.classList.contains('sense-case')
+        ? 'sense'
+        : section.classList.contains('kodi-case')
+          ? 'kodi'
+          : null).filter(Boolean),
+  )
+  expect(sectionOrder).toEqual(['sense', 'museum', 'kodi'])
+  await expect(page.getByText('photos-app', { exact: true })).toHaveCount(0)
+
+  const assets = page.locator('[data-museum-asset]')
+  await expect(assets).toHaveCount(5)
+  for (let index = 0; index < await assets.count(); index += 1) {
+    const image = assets.nth(index)
+    await image.scrollIntoViewIfNeeded()
+    await expect(image).toHaveAttribute('alt', /\S+/)
+    await expect.poll(() => image.evaluate((node) => node.complete && node.naturalWidth > 0)).toBe(true)
+  }
+})
+
+test('ссылки кейса музея ведут на V1 и отдельную V2', async ({ page }) => {
+  await page.goto('./')
+  const museum = page.locator('[data-museum-case]')
+  await expect(museum.getByRole('link', { name: /Открыть V2/ })).toHaveAttribute('href', 'https://barbar1sbas.github.io/skillbox_museum_v2/')
+  await expect(museum.getByRole('link', { name: /Код V2/ })).toHaveAttribute('href', 'https://github.com/BarBar1sBAS/skillbox_museum_v2')
+  await expect(museum.getByRole('link', { name: /Сравнить с V1/ })).toHaveAttribute('href', 'https://barbar1sbas.github.io/skillbox_museum/')
+})

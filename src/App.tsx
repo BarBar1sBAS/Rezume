@@ -144,12 +144,92 @@ function SenseCase() {
   )
 }
 
+function MuseumCase() {
+  return (
+    <Reveal>
+      <section className="case museum-case" aria-labelledby="museum-title" data-museum-case>
+        <div className="museum-masthead">
+          <div className="museum-wordmark" aria-label="Музей криптографии">музей<br />крипто<br />графии</div>
+          <div><span>Автор V2, Frontend-разработчик</span><span>2026</span></div>
+        </div>
+
+        <div className="museum-intro">
+          <p className="eyebrow">Публичный проект без NDA</p>
+          <h2 id="museum-title">Музей криптографии:<br />от V1 к V2</h2>
+          <div>
+            <p>V1 команда представила без моего заметного участия. После обратной связи о необходимости переработать дизайн я полностью взял V2 на себя.</p>
+            <p>Провёл аудит первой версии и материалов музея, выделил устойчивые визуальные приёмы и пересобрал интерфейс как цельный цифровой экспонат.</p>
+          </div>
+        </div>
+
+        <div className="museum-comparison" aria-label="Сравнение первой и второй версий проекта">
+          <figure className="museum-frame museum-v1">
+            <picture>
+              <source media="(max-width: 767px)" srcSet="/Rezume/assets/museum/v1-720.webp" />
+              <img src="/Rezume/assets/museum/v1-1200.webp" srcSet="/Rezume/assets/museum/v1-720.webp 720w, /Rezume/assets/museum/v1-1200.webp 1200w" sizes="(max-width: 767px) 100vw, 34vw" alt="Стартовый экран первой версии проекта Музея криптографии" width="1200" height="750" loading="lazy" data-museum-asset />
+            </picture>
+            <figcaption><strong>V1</strong><span>Компактный сценарий до дизайн-аудита</span></figcaption>
+          </figure>
+          <figure className="museum-frame museum-v2">
+            <picture>
+              <source media="(max-width: 767px)" srcSet="/Rezume/assets/museum/v2-start-720.webp" />
+              <img src="/Rezume/assets/museum/v2-start-1200.webp" srcSet="/Rezume/assets/museum/v2-start-720.webp 720w, /Rezume/assets/museum/v2-start-1200.webp 1200w" sizes="(max-width: 767px) 100vw, 66vw" alt="Стартовый экран V2 с новой композицией и пиксельной иллюстрацией" width="1200" height="771" loading="lazy" data-museum-asset />
+            </picture>
+            <figcaption><strong>V2</strong><span>Визуальная система работает на историю и механику</span></figcaption>
+          </figure>
+        </div>
+
+        <div className="museum-process">
+          <article><span>Аудит</span><h3>Нашёл разрыв между брендом и интерфейсом</h3><p>Сверил V1 с сайтом и материалами музея, разобрал иерархию, композицию, типографику и состояния.</p></article>
+          <article><span>Система</span><h3>Собрал узнаваемый визуальный язык</h3><p>Halvar, светлая и тёмная палитры, прямоугольная геометрия и пиксельные сцены стали правилами, а не декором.</p></article>
+          <article><span>Реализация</span><h3>Обновил продукт, сохранив его логику</h3><p>React, TypeScript, токены, UI kit, Storybook и TDD позволили менять представление быстро и контролируемо.</p></article>
+        </div>
+
+        <div className="museum-gallery">
+          <figure className="museum-frame museum-dark">
+            <img src="/Rezume/assets/museum/v2-dark-1200.webp" srcSet="/Rezume/assets/museum/v2-dark-720.webp 720w, /Rezume/assets/museum/v2-dark-1200.webp 1200w" sizes="(max-width: 767px) 100vw, 62vw" alt="Тёмная тема стартового экрана V2 Музея криптографии" width="1200" height="771" loading="lazy" data-museum-asset />
+            <figcaption><strong>Две темы</strong><span>Иллюстрации меняются вместе с освещением интерфейса</span></figcaption>
+          </figure>
+          <figure className="museum-frame museum-mobile">
+            <img src="/Rezume/assets/museum/v2-mobile.webp" alt="Мобильная игровая сцена V2 с вопросом о безопасной оплате" width="390" height="1296" loading="lazy" data-museum-asset />
+            <figcaption><strong>390 px</strong><span>Полный сценарий без горизонтального скролла</span></figcaption>
+          </figure>
+          <figure className="museum-frame museum-final">
+            <img src="/Rezume/assets/museum/v2-final-1200.webp" srcSet="/Rezume/assets/museum/v2-final-720.webp 720w, /Rezume/assets/museum/v2-final-1200.webp 1200w" sizes="(max-width: 767px) 100vw, 76vw" alt="Финальный экран V2 с расшифрованным посланием и наградой" width="1200" height="898" loading="lazy" data-museum-asset />
+            <figcaption><strong>Финал</strong><span>Результат, три ключа и понятное завершение истории</span></figcaption>
+          </figure>
+        </div>
+
+        <div className="museum-evidence" aria-label="Подтверждённые показатели качества V2">
+          <div className="museum-evidence-lead"><span>Проверено в репозитории</span><strong>Качество не заявлено на словах. Оно зафиксировано тестами и аудитом.</strong></div>
+          <dl>
+            <div><dt>Vitest</dt><dd>150+ тестов</dd></div>
+            <div><dt>Coverage</dt><dd>100%</dd></div>
+            <div><dt>Playwright</dt><dd>23 сценария</dd></div>
+            <div><dt>Lighthouse: Perf / A11y / BP</dt><dd>95 / 100 / 100</dd></div>
+            <div><dt>Impeccable</dt><dd>18 / 20</dd></div>
+          </dl>
+        </div>
+
+        <div className="museum-footer">
+          <p>Командный учебный проект в рамках Skillbox. V2, дизайн-аудит и реализация выполнены мной самостоятельно.</p>
+          <div className="museum-links">
+            <a className="button button-primary" href="https://barbar1sbas.github.io/skillbox_museum_v2/" target="_blank" rel="noreferrer">Открыть V2 <Arrow /></a>
+            <a className="text-link" href="https://github.com/BarBar1sBAS/skillbox_museum_v2" target="_blank" rel="noreferrer">Код V2 <Arrow /></a>
+            <a className="text-link" href="https://barbar1sbas.github.io/skillbox_museum/" target="_blank" rel="noreferrer">Сравнить с V1 <Arrow /></a>
+          </div>
+        </div>
+      </section>
+    </Reveal>
+  )
+}
+
 function KodiCase() {
   return (
     <Reveal>
       <section className="case kodi-case">
         <div className="kodi-copy">
-          <div className="section-number">02 / Product architecture</div>
+          <div className="section-number">Product architecture</div>
           <p className="eyebrow">Коди.АИ · MVP</p>
           <h2>Полный продукт,<br />а не только экран</h2>
           <p>Архитектура MVP с типобезопасной маршрутизацией, авторизацией, серверной частью и компонентным контуром. Проект показывает, как я мыслю системой — от модели данных до состояния кнопки.</p>
@@ -238,7 +318,7 @@ export default function App() {
     <>
       <a className="skip-link" href="#main">К основному содержанию</a>
       <Header />
-      <main id="main"><Hero /><Evidence /><SenseCase /><KodiCase /><ProjectGallery /><Experience /><Skills /><Contact /></main>
+      <main id="main"><Hero /><Evidence /><SenseCase /><MuseumCase /><KodiCase /><ProjectGallery /><Experience /><Skills /><Contact /></main>
       <footer><span>Борис Басов © 2026</span><a href="#top">Наверх ↑</a></footer>
     </>
   )

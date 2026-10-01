@@ -55,16 +55,6 @@ export const projects: ProjectCase[] = [
     live: 'https://barbar1sbas.github.io/React_final_work/',
     layout: 'standard',
   },
-  {
-    title: 'photos-app',
-    eyebrow: 'Интерфейс данных',
-    description: 'Табличный интерфейс с фильтрацией, сортировкой и пагинацией. На кадре — безопасные демо-данные.',
-    image: '/Rezume/assets/optimized/photos-app.webp',
-    alt: 'Таблица фотографий с демо-данными в проекте photos-app',
-    stack: ['React', 'TypeScript', 'Data UI'],
-    href: 'https://github.com/BarBar1sBAS/photos-app',
-    layout: 'compact',
-  },
 ]
 
 export const experience: ExperienceItem[] = [
