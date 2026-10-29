@@ -173,8 +173,8 @@ main { width: min(calc(100% - 48px), var(--max)); margin: 0 auto; }
 
 .zacep-case { border-top: 1px solid var(--line); }
 .zacep-masthead { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
-.zacep-name { display: inline-flex; align-items: center; gap: 24px; font-size: 30px; font-weight: 600; letter-spacing: -.06em; }
-.zacep-name > span { color: var(--accent); font-size: 36px; }
+.zacep-logo { width: 159px; flex-shrink: 0; }
+[data-theme='dark'] .zacep-logo { filter: invert(1); }
 .zacep-masthead > div { display: flex; gap: clamp(28px, 7vw, 100px); color: var(--muted); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
 .zacep-intro { padding: 80px 0 64px; }
 .zacep-intro h2 { max-width: 1150px; margin: 24px 0 40px; text-wrap: balance; }
@@ -239,7 +239,7 @@ main { width: min(calc(100% - 48px), var(--max)); margin: 0 auto; }
 
 @media (max-width: 767px) {
   .zacep-masthead { align-items: flex-start; }
-  .zacep-name { gap: 12px; font-size: 24px; }
+  .zacep-logo { width: 120px; }
   .zacep-masthead > div { flex-direction: column; gap: 8px; max-width: 180px; text-align: right; line-height: 1.5; }
   .zacep-intro { padding: 48px 0 40px; }
   .zacep-case .zacep-intro h2 { font-size: clamp(40px, 11vw, 72px); line-height: 1; margin-bottom: 32px; }

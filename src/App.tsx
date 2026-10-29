@@ -154,7 +154,7 @@ function ZacepCase() {
     <section className="case zacep-case" id="zacep" aria-labelledby="zacep-title" data-zacep-case>
       <Reveal>
         <div className="zacep-masthead">
-          <span className="zacep-name">Зацеп<span aria-hidden="true">↗</span></span>
+          <img className="zacep-logo" src={`${import.meta.env.BASE_URL}assets/zacep/logo.svg`} alt="Зацеп" width={159.018} height={58} loading="lazy" />
           <div><span>UX/UI и frontend-разработка</span><span>2026</span></div>
         </div>
         <div className="zacep-intro">
