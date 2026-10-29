@@ -64,19 +64,21 @@ test('кейс SENSE использует реальные доступные в
   await expect(page.locator('#work')).toContainText('Коммерческий проект. Исходники закрыты.')
 })
 
-test('музей заменяет photos-app и расположен между SENSE и Коди.АИ', async ({ page }) => {
+test('кейсы идут в порядке SENSE, Зацеп, Музей, Коди.АИ', async ({ page }) => {
   await page.goto('./')
 
   const sectionOrder = await page.locator('main section').evaluateAll((sections) =>
     sections.map((section) => section.getAttribute('data-museum-case') !== null
       ? 'museum'
-      : section.classList.contains('sense-case')
+      : section.hasAttribute('data-zacep-case')
+        ? 'zacep'
+        : section.classList.contains('sense-case')
         ? 'sense'
         : section.classList.contains('kodi-case')
           ? 'kodi'
           : null).filter(Boolean),
   )
-  expect(sectionOrder).toEqual(['sense', 'museum', 'kodi'])
+  expect(sectionOrder).toEqual(['sense', 'zacep', 'museum', 'kodi'])
   await expect(page.getByText('photos-app', { exact: true })).toHaveCount(0)
 
   const assets = page.locator('[data-museum-asset]')
@@ -86,6 +88,44 @@ test('музей заменяет photos-app и расположен между 
     await image.scrollIntoViewIfNeeded()
     await expect(image).toHaveAttribute('alt', /\S+/)
     await expect.poll(() => image.evaluate((node) => node.complete && node.naturalWidth > 0)).toBe(true)
+  }
+})
+
+test('Зацеп доступен по прямой ссылке и ведёт к исходным материалам', async ({ page }) => {
+  await page.goto('./#zacep')
+  const zacep = page.locator('#zacep')
+  await expect(zacep).toBeInViewport()
+  await expect(zacep.getByRole('heading', { level: 2 })).toContainText('от макета в Figma до работающего сайта')
+  await expect(zacep.getByRole('link', { name: /Открыть сайт/ })).toHaveCount(2)
+  for (const link of await zacep.getByRole('link', { name: /Открыть сайт/ }).all()) {
+    await expect(link).toHaveAttribute('href', 'https://barbar1sbas.github.io/zacep/')
+  }
+  await expect(zacep.getByRole('link', { name: /Макеты в Figma/ })).toHaveAttribute('href', 'https://www.figma.com/design/33uZlvdpstuANY0xc0tvUf?node-id=131-2406')
+  await expect(zacep.getByRole('link', { name: /Смотреть UI kit/ })).toHaveAttribute('href', 'https://www.figma.com/design/33uZlvdpstuANY0xc0tvUf?node-id=133-2407')
+  await expect(zacep.getByRole('link', { name: /Код на GitHub/ })).toHaveAttribute('href', 'https://github.com/BarBar1sBAS/zacep')
+  await expect(zacep.getByRole('link', { name: /Журнал проверок/ })).toHaveAttribute('href', 'https://github.com/BarBar1sBAS/zacep/blob/dfffe9e/tests/TDD.md')
+  await expect(zacep).toContainText('отправка заявок пока не подключена')
+})
+
+test('Зацеп читается в обеих темах и его части появляются при прокрутке', async ({ page }) => {
+  for (const theme of ['light', 'dark']) {
+    for (const width of [320, 390, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 })
+      await page.goto('./#zacep')
+      if (await page.locator('html').getAttribute('data-theme') !== theme) {
+        await page.getByRole('button', { name: theme === 'dark' ? 'Включить тёмную тему' : 'Включить светлую тему' }).click()
+      }
+      await expect(page.locator('html')).toHaveAttribute('data-theme', theme)
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
+      expect(overflow, `${theme} / ${width}px`).toBeLessThanOrEqual(1)
+      const images = page.locator('[data-zacep-asset]')
+      for (const image of await images.all()) {
+        await image.scrollIntoViewIfNeeded()
+        await expect(image).toHaveAttribute('alt', /\S+/)
+        await expect.poll(() => image.evaluate(node => node.complete && node.naturalWidth > 0)).toBe(true)
+        await expect.poll(() => image.evaluate(node => node.closest('.reveal')?.getAttribute('data-visible'))).toBe('true')
+      }
+    }
   }
 })
 

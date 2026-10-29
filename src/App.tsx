@@ -144,6 +144,106 @@ function SenseCase() {
   )
 }
 
+function ZacepImage({ name, alt, width, height, sizes = '(max-width: 767px) 100vw, 70vw' }: { name: string; alt: string; width: number; height: number; sizes?: string }) {
+  const base = `${import.meta.env.BASE_URL}assets/zacep/${name}`
+  return <img src={`${base}-1200.webp`} srcSet={`${base}-720.webp ${Math.min(width, 720)}w, ${base}-1200.webp ${Math.min(width, 1200)}w`} sizes={sizes} alt={alt} width={width} height={height} loading="lazy" data-zacep-asset />
+}
+
+function ZacepCase() {
+  return (
+    <section className="case zacep-case" id="zacep" aria-labelledby="zacep-title" data-zacep-case>
+      <Reveal>
+        <div className="zacep-masthead">
+          <span className="zacep-name">Зацеп<span aria-hidden="true">↗</span></span>
+          <div><span>UX/UI и frontend-разработка</span><span>2026</span></div>
+        </div>
+        <div className="zacep-intro">
+          <p className="eyebrow">Сайт контент-агентства · полный цикл</p>
+          <h2 id="zacep-title"><span>Зацеп —</span> от макета в Figma до работающего сайта</h2>
+          <div className="zacep-summary">
+            <p>Я спроектировал и собрал сайт, который объясняет услуги агентства, показывает подход к контенту и ведёт к обсуждению задачи. От структуры и прототипа до библиотеки компонентов и публикации.</p>
+            <a className="text-link" href="https://barbar1sbas.github.io/zacep/" target="_blank" rel="noreferrer">Открыть сайт <Arrow /></a>
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal>
+        <figure className="zacep-frame zacep-cover">
+          <ZacepImage name="site-desktop" alt="Первый экран опубликованного сайта Зацеп: крупный оффер, коллаж и кнопка обсуждения задачи" width={1440} height={812} sizes="(max-width: 1488px) 100vw, 1440px" />
+          <figcaption><strong>Работающий сайт</strong><span>Актуальная версия · React, TypeScript и Vite</span></figcaption>
+        </figure>
+      </Reveal>
+
+      <Reveal className="zacep-chapter">
+        <div className="zacep-chapter-heading">
+          <p className="eyebrow">01 / Структура и прототип</p>
+          <h3>Сначала — путь<br />пользователя</h3>
+          <div className="zacep-copy"><p>Начал с каркаса: предложение, услуги, работы, процесс, роли, ответы на вопросы и заявка. У каждого раздела есть задача — помочь человеку понять, что агентство может сделать для его бизнеса.</p><p>В Figma связал экраны и состояния: выбор услуги и роли, открытие кейса и возврат, FAQ, мобильное меню и сценарий формы. Так поведение можно было проверить ещё до вёрстки.</p></div>
+        </div>
+        <div className="zacep-evolution">
+          <figure className="zacep-frame zacep-wireframe"><ZacepImage name="wireframe" alt="Каркас первого экрана в Figma: расположение оффера, действия и изображения без оформления" width={1440} height={692} sizes="(max-width: 767px) 100vw, 34vw" /><figcaption><strong>Каркас</strong><span>Проверка структуры и приоритетов</span></figcaption></figure>
+          <figure className="zacep-frame zacep-design"><ZacepImage name="figma-design" alt="Продуктовый макет первого экрана Зацеп в Figma с типографикой, коллажем и лаймовым акцентом" width={1440} height={716} /><figcaption><strong>Продуктовый макет</strong><span>Архивный экспорт Figma · этап дизайна</span></figcaption></figure>
+        </div>
+      </Reveal>
+
+      <Reveal className="zacep-design-note">
+        <p className="eyebrow">02 / Визуальная система</p>
+        <h3>Характер бренда.<br />Понятные правила.</h3>
+        <div className="zacep-copy"><p>На основе брендбука развил визуальную систему: бумажный фон, лаймовые акценты, плотные заголовки и коллажи. Задал сетку, типографику, отступы и состояния, чтобы страницы оставались цельными.</p><p>Подготовил лендинг и страницу кейса в трёх размерах: 1440, 768 и 390 px. На узких экранах перестроил композицию, навигацию и выбор услуг под вертикальный сценарий.</p></div>
+      </Reveal>
+
+      <Reveal className="zacep-chapter">
+        <div className="zacep-chapter-heading">
+          <p className="eyebrow">03 / UI kit → React → Storybook</p>
+          <h3>Одна система<br />в макете и коде</h3>
+          <div className="zacep-copy"><p>Перенёс токены в SCSS, а повторяющиеся элементы — в React-компоненты: кнопки, поля, карточки, переключатели, аккордеоны, меню и форму. Общие правила задаются в одном месте.</p><p>В Storybook оформил состояния, документацию и интерактивные проверки. Компоненты можно изучить отдельно от страницы: изменить свойства, проверить фокус, ошибку или отключённое состояние.</p></div>
+        </div>
+        <div className="zacep-system">
+          <div className="zacep-kit">
+            <div className="zacep-kit-label"><strong>UI kit / Figma</strong><a className="text-link" href="https://www.figma.com/design/33uZlvdpstuANY0xc0tvUf?node-id=133-2407" target="_blank" rel="noreferrer">Смотреть UI kit <Arrow /></a></div>
+            <figure><ZacepImage name="kit-buttons" alt="Пять состояний основной кнопки из UI kit Зацеп в Figma" width={1160} height={107} sizes="(max-width: 767px) 100vw, 40vw" /><figcaption>Кнопка: от обычного состояния до disabled</figcaption></figure>
+            <figure><ZacepImage name="kit-fields" alt="Состояния поля ввода Зацеп, включая заполнение, фокус и ошибку" width={814} height={241} sizes="(max-width: 767px) 100vw, 40vw" /><figcaption>Поле: ввод, подсказка и ошибка</figcaption></figure>
+            <figure><ZacepImage name="kit-selection" alt="Варианты строки выбора услуги из Figma, включая выбранное состояние" width={1137} height={196} sizes="(max-width: 767px) 100vw, 40vw" /><figcaption>Переключатель: выбор и обратная связь</figcaption></figure>
+          </div>
+          <figure className="zacep-frame zacep-storybook"><ZacepImage name="storybook" alt="Документация React-компонента Input в Storybook Зацеп: пример поля, свойства и состояния" width={1440} height={1000} /><figcaption><strong>Storybook</strong><span>Те же элементы — как рабочие компоненты</span></figcaption></figure>
+        </div>
+      </Reveal>
+
+      <Reveal className="zacep-chapter">
+        <div className="zacep-chapter-heading">
+          <p className="eyebrow">04 / Реализация</p>
+          <h3>Из компонентов —<br />в работающий сайт</h3>
+          <div className="zacep-copy"><p>Собрал лендинг и страницу кейса на React, TypeScript и Vite. Подключил переключение услуг и ролей, FAQ, мобильное меню, переходы по разделам и проверку обязательных полей.</p><p>Проверил управление с клавиатуры, возврат фокуса после закрытия меню и режим без движения. Настроил публикацию на GitHub Pages: сайт обновляется после изменений в основной ветке.</p></div>
+        </div>
+        <ul className="stack-list" aria-label="Технологии Зацепа">{['Figma', 'React', 'TypeScript', 'Vite', 'SCSS', 'Storybook', 'Vitest', 'Playwright'].map(item => <li key={item}>{item}</li>)}</ul>
+      </Reveal>
+
+      <div className="zacep-responsive">
+        <Reveal className="zacep-mobile"><figure className="zacep-frame"><img src={`${import.meta.env.BASE_URL}assets/zacep/site-mobile-390.webp`} alt="Опубликованный сайт Зацеп на телефоне шириной 390 пикселей: меню, оффер и вертикальный коллаж" width={390} height={1012} loading="lazy" data-zacep-asset /><figcaption><strong>390 px</strong><span>Композиция для телефона</span></figcaption></figure></Reveal>
+        <Reveal className="zacep-case-page"><figure className="zacep-frame"><ZacepImage name="site-case" alt="Страница демонстрационного кейса Зацеп с заголовком, вводным текстом и большим коллажем" width={1440} height={1100} /><figcaption><strong>Страница кейса</strong><span>От задачи и идеи до материалов и результата</span></figcaption></figure></Reveal>
+      </div>
+
+      <Reveal className="zacep-result">
+        <div className="zacep-result-heading"><p className="eyebrow">05 / Проверки и результат</p><h3>Дизайн, который<br />можно открыть<br />и проверить</h3><p>В результате — адаптивный сайт и библиотека компонентов с документацией. Решения из макета работают в интерфейсе, а основные сценарии проверены в браузере.</p></div>
+        <div className="zacep-proof">
+          <dl><div><dt>UI-проверки в Chromium</dt><dd>165</dd></div><div><dt>Размеры экрана в проверках</dt><dd>6</dd></div><div><dt>Адаптивные макеты</dt><dd>1440 / 768 / 390</dd></div></dl>
+          <p className="zacep-proof-source">По журналу проверки от 28 октября 2026: UI, доступность и адаптивность от 360 до 1440 px.</p>
+          <a className="text-link" href="https://github.com/BarBar1sBAS/zacep/blob/dfffe9e/tests/TDD.md" target="_blank" rel="noreferrer">Журнал проверок <Arrow /></a>
+        </div>
+      </Reveal>
+
+      <Reveal className="zacep-footer">
+        <p>Опубликована демоверсия. Форма проверяет поля, но отправка заявок пока не подключена. Работы внутри сайта — демонстрационные концепции.</p>
+        <div className="zacep-links">
+          <a className="button button-primary" href="https://barbar1sbas.github.io/zacep/" target="_blank" rel="noreferrer">Открыть сайт <Arrow /></a>
+          <a className="text-link" href="https://www.figma.com/design/33uZlvdpstuANY0xc0tvUf?node-id=131-2406" target="_blank" rel="noreferrer">Макеты в Figma <Arrow /></a>
+          <a className="text-link" href="https://github.com/BarBar1sBAS/zacep" target="_blank" rel="noreferrer">Код на GitHub <Arrow /></a>
+        </div>
+      </Reveal>
+    </section>
+  )
+}
+
 function MuseumCase() {
   return (
     <Reveal>
@@ -314,11 +414,18 @@ function Contact() {
 }
 
 export default function App() {
+  useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (hash) {
+      void document.fonts.ready.then(() => document.getElementById(hash)?.scrollIntoView({ behavior: 'instant' }))
+    }
+  }, [])
+
   return (
     <>
       <a className="skip-link" href="#main">К основному содержанию</a>
       <Header />
-      <main id="main"><Hero /><Evidence /><SenseCase /><MuseumCase /><KodiCase /><ProjectGallery /><Experience /><Skills /><Contact /></main>
+      <main id="main"><Hero /><Evidence /><SenseCase /><ZacepCase /><MuseumCase /><KodiCase /><ProjectGallery /><Experience /><Skills /><Contact /></main>
       <footer><span>Борис Басов © 2026</span><a href="#top">Наверх ↑</a></footer>
     </>
   )
